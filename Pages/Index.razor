@@ -1,0 +1,456 @@
+﻿@page "/"
+
+<!-- Estilos CSS embutidos -->
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Nunito', sans-serif;
+        background: linear-gradient(135deg, #fff5f5 0%, #f0f9ff 100%);
+        color: #333;
+        min-height: 100vh;
+    }
+
+    .header {
+        background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+        .logo span {
+            color: #ffd166;
+        }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+    }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+            .nav-links a:hover {
+                background: rgba(255,255,255,0.2);
+                transform: translateY(-2px);
+            }
+
+    .cart-icon {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #ffd166;
+        color: #ff6b6b;
+        font-size: 0.7rem;
+        font-weight: bold;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero {
+        background: linear-gradient(rgba(255, 107, 107, 0.8), rgba(255, 142, 142, 0.9)), url('https://placehold.co/1200x400/ff6b6b/ffffff?text=K-Pop+Photocards');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+    }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+    .cta-button {
+        background: #ffd166;
+        color: #ff6b6b;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+    .section-title {
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        color: #ff6b6b;
+        margin: 3rem 0 2rem;
+        font-size: 2rem;
+    }
+
+    .products {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+    .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 3px solid #ffd166;
+    }
+
+    .product-info {
+        padding: 1.5rem;
+    }
+
+    .product-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: #ff6b6b;
+    }
+
+    .product-group {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+        font-weight: 700;
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .add-to-cart {
+        width: 100%;
+        background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+        color: white;
+        border: none;
+        padding: 0.8rem;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .add-to-cart:hover {
+            background: linear-gradient(90deg, #ff5252, #ff7b7b);
+        }
+
+    .new-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ffd166;
+        color: #ff6b6b;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.8rem;
+    }
+
+    .features {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #ff6b6b;
+    }
+
+    .feature-title {
+        font-family: 'Poppins', sans-serif;
+        color: #ff6b6b;
+        margin-bottom: 1rem;
+    }
+
+    .footer {
+        background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+        color: white;
+        text-align: center;
+        padding: 3rem 2rem;
+        margin-top: 4rem;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .social-link {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        color: white; /* Adicionado para cor do texto/ícone */
+        text-decoration: none; /* Remover sublinhado */
+    }
+
+        .social-link:hover {
+            background: white;
+            color: #ff6b6b;
+            transform: translateY(-3px);
+        }
+
+    @@media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .product-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+    }
+</style>
+
+<!-- Conteúdo HTML -->
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">Kawaii<span>Card</span></div>
+        <div class="nav-links">
+            <a href="#">Início</a>
+            <a href="#">Produtos</a>
+            <a href="#">Novidades</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+        </div>
+        <div class="cart-icon" @onclick="IncrementarCarrinho">
+            <span style="font-size: 1.5rem;">🛒</span>
+            <div class="cart-count">@contadorCarrinho</div>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Photocards K-Pop Authentic</h1>
+    <p>Encontre as melhores photocards de seus ídolos favoritos com qualidade premium e envio rápido para todo o Brasil!</p>
+    <button class="cta-button">Comprar Agora</button>
+</section>
+
+<h2 class="section-title">Mais Populares</h2>
+<section class="products">
+    <div class="product-grid">
+        @foreach (var produto in produtosPopulares)
+        {
+            <div class="product-card">
+                @if (produto.IsNovo)
+                {
+                    <div class="new-badge">NOVO</div>
+                }
+                <img src="@produto.ImagemUrl" alt="@produto.Nome" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">@produto.Nome</div>
+                    <div class="product-group">@produto.Grupo</div>
+                    <div class="product-price">R$ @produto.Preco.ToString("F2")</div>
+                    <button class="add-to-cart" @onclick="() => AdicionarAoCarrinho(produto)">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<h2 class="section-title">Recém Chegados</h2>
+<section class="products">
+    <div class="product-grid">
+        @foreach (var produto in produtosNovos)
+        {
+            <div class="product-card">
+                @if (produto.IsNovo)
+                {
+                    <div class="new-badge">NOVO</div>
+                }
+                <img src="@produto.ImagemUrl" alt="@produto.Nome" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">@produto.Nome</div>
+                    <div class="product-group">@produto.Grupo</div>
+                    <div class="product-price">R$ @produto.Preco.ToString("F2")</div>
+                    <button class="add-to-cart" @onclick="() => AdicionarAoCarrinho(produto)">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="features">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3 class="feature-title">Envio Rápido</h3>
+            <p>Entrega em todo Brasil em até 5 dias úteis com rastreamento exclusivo.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3 class="feature-title">Autenticidade Garantida</h3>
+            <p>Todas as photocards são 100% originais e vem com certificado de autenticidade.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💝</div>
+            <h3 class="feature-title">Embalagem Kawaii</h3>
+            <p>Photocards enviadas em embalagens fofas e protegidas especialmente para você.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <h3>Kawaii Photocard Store</h3>
+        <p>Sua loja preferida para photocards K-Pop autênticas</p>
+        <div class="social-links">
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🎵</a>
+            <a href="#" class="social-link">💬</a>
+            <a href="#" class="social-link">📧</a>
+        </div>
+        <p>&copy; 2023 Kawaii Photocard Store. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+@code {
+    private int contadorCarrinho = 3;
+
+    // Modelos de dados simples
+    public class Produto
+    {
+        public string Nome { get; set; } = string.Empty;
+        public string Grupo { get; set; } = string.Empty;
+        public decimal Preco { get; set; }
+        public string ImagemUrl { get; set; } = string.Empty;
+        public bool IsNovo { get; set; }
+    }
+
+    // Dados de exemplo para produtos populares
+    private List<Produto> produtosPopulares = new List<Produto>
+    {
+        new Produto { Nome = "BTS V - BTS THE BEST", Grupo = "BTS", Preco = 29.90m, ImagemUrl = "https://placehold.co/300x200/ff6b6b/ffffff?text=BTS+V", IsNovo = true },
+        new Produto { Nome = "BLACKPINK Jisoo - BORN PINK", Grupo = "BLACKPINK", Preco = 32.90m, ImagemUrl = "https://placehold.co/300x200/4ecdc4/ffffff?text=BLACKPINK+Jisoo", IsNovo = false },
+        new Produto { Nome = "TWICE Momo - Formula of Love", Grupo = "TWICE", Preco = 27.90m, ImagemUrl = "https://placehold.co/300x200/ffd166/333333?text=TWICE+Momo", IsNovo = false },
+        new Produto { Nome = "Stray Kids Hyunjin - NOEASY", Grupo = "Stray Kids", Preco = 31.90m, ImagemUrl = "https://placehold.co/300x200/6a0572/ffffff?text=Stray+Kids+Hyunjin", IsNovo = true }
+    };
+
+    // Dados de exemplo para produtos novos
+    private List<Produto> produtosNovos = new List<Produto>
+    {
+        new Produto { Nome = "IVE Liz - LOVE DIVE", Grupo = "IVE", Preco = 28.90m, ImagemUrl = "https://placehold.co/300x200/ff9a8b/ffffff?text=IVE+Liz", IsNovo = true },
+        new Produto { Nome = "NewJeans Minji - Hype Boy", Grupo = "NewJeans", Preco = 30.90m, ImagemUrl = "https://placehold.co/300x200/9b5de5/ffffff?text=NewJeans+Minji", IsNovo = false },
+        new Produto { Nome = "(G)I-DLE Miyeon - I NEVER DIE", Grupo = "(G)I-DLE", Preco = 29.90m, ImagemUrl = "https://placehold.co/300x200/00bbf9/ffffff?text=(G)I-DLE+Miyeon", IsNovo = true },
+        new Produto { Nome = "aespa Karina - Next Level", Grupo = "aespa", Preco = 33.90m, ImagemUrl = "https://placehold.co/300x200/f15bb5/ffffff?text=aespa+Karina", IsNovo = false }
+    };
+
+    private void IncrementarCarrinho()
+    {
+        contadorCarrinho++;
+    }
+
+    private void AdicionarAoCarrinho(Produto produto)
+    {
+        contadorCarrinho++;
+        // Aqui você pode adicionar lógica para realmente adicionar ao carrinho (state management, etc.)
+        // Por enquanto, apenas incrementamos o contador visual.
+    }
+}
